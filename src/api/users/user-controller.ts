@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 import { UserQueryId } from '../../types/types.js';
-import { UserModel } from './users-schema.js';
+import { UserModel } from './user-schema.js';
 
 export const getUserById: RequestHandler<UserQueryId> = async (req, res) => {
   const { id } = req.params;

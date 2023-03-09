@@ -1,5 +1,5 @@
-import { UserModel } from './users-schema.js';
-import { getUserById } from './users-controller.js';
+import { UserModel } from './user-schema.js';
+import { getUserById } from './user-controller.js';
 import { Request, Response } from 'express';
 import { UserQueryId } from '../../types/types.js';
 
