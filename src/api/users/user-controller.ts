@@ -13,3 +13,16 @@ export const getUserById: RequestHandler<UserQueryId> = async (req, res) => {
 
   return res.status(404);
 };
+
+export const updateUserByIdController: RequestHandler = async (req, res) => {
+  const { id } = req.params;
+
+  const dbRes = await UserModel.updateOne({ _id: id }, { ...req.body }).exec();
+  if (dbRes.matchedCount === 0) {
+    res.status(404);
+  }
+
+  if (dbRes.modifiedCount === 1) {
+    res.status(200).json({ msg: 'Su usuario ha sido modificado' });
+  }
+};
