@@ -14,7 +14,7 @@ export const getUserById: RequestHandler<UserQueryId> = async (req, res) => {
   return res.status(404);
 };
 
-export const updateUserByIdController: RequestHandler = async (req, res) => {
+export const updateUserById: RequestHandler = async (req, res) => {
   const { id } = req.params;
 
   const dbRes = await UserModel.updateOne({ _id: id }, { ...req.body }).exec();
