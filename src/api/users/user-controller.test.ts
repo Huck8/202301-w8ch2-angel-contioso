@@ -1,5 +1,8 @@
 import { UserModel } from './user-schema.js';
-import { getUserById, updateUserById } from './user-controller.js';
+import {
+  getUserByIdController,
+  updateUserByIdController,
+} from './user-controller.js';
 import { Request, Response } from 'express';
 import { UserQueryId } from '../../types/types.js';
 
@@ -26,7 +29,7 @@ describe('Given a function to get a user by their id', () => {
       .fn()
       .mockReturnValue({ exec: jest.fn().mockResolvedValue(user) });
 
-    await getUserById(
+    await getUserByIdController(
       mockRequest as Request<UserQueryId>,
       mockResponse as Response,
       jest.fn(),
@@ -41,7 +44,7 @@ describe('Given a function to get a user by their id', () => {
       .fn()
       .mockReturnValue({ exec: jest.fn().mockResolvedValue(null) });
 
-    await getUserById(
+    await getUserByIdController(
       mockRequest as Request<UserQueryId>,
       mockResponse as Response,
       jest.fn(),
@@ -75,7 +78,11 @@ describe('Given an updateById', () => {
       exec: jest.fn().mockResolvedValueOnce({ modifiedCount: 1 }),
     }));
 
-    await updateUserById(request as Request, response as Response, jest.fn());
+    await updateUserByIdController(
+      request as Request,
+      response as Response,
+      jest.fn(),
+    );
 
     expect(response.status).toHaveBeenCalledWith(200);
     expect(response.json).toHaveBeenCalledWith({
@@ -92,7 +99,11 @@ describe('Given an updateById', () => {
       exec: jest.fn().mockResolvedValueOnce({ matchedCount: 0 }),
     }));
 
-    await updateUserById(request as Request, response as Response, jest.fn());
+    await updateUserByIdController(
+      request as Request,
+      response as Response,
+      jest.fn(),
+    );
 
     expect(response.status).toHaveBeenCalledWith(404);
   });

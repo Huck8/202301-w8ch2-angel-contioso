@@ -2,7 +2,10 @@ import { RequestHandler } from 'express';
 import { UserQueryId } from '../../types/types.js';
 import { UserModel } from './user-schema.js';
 
-export const getUserById: RequestHandler<UserQueryId> = async (req, res) => {
+export const getUserByIdController: RequestHandler<UserQueryId> = async (
+  req,
+  res,
+) => {
   const { id } = req.params;
 
   const user = await UserModel.findById({ _id: id }).exec();
@@ -14,7 +17,7 @@ export const getUserById: RequestHandler<UserQueryId> = async (req, res) => {
   return res.status(404);
 };
 
-export const updateUserById: RequestHandler = async (req, res) => {
+export const updateUserByIdController: RequestHandler = async (req, res) => {
   const { id } = req.params;
 
   const dbRes = await UserModel.updateOne({ _id: id }, { ...req.body }).exec();
